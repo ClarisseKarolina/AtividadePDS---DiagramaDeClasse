@@ -1,11 +1,11 @@
 #Classe Artigo (título, Autor)
 class Artigo:
-    def __init__(self, titulo, autor):
+    def __init__ (self,titulo, autor):
         self.titulo = titulo
         self.autor = autor
 
-    def getArtigo(self):
-        return "Titulo:" + self.titulo + " | " + "Autor:" + self.autor
+    def GetArtigo(self):
+        return "Título: " + str(self.titulo) + " ; " + "Autor: " + str(self.autor)
 
 
 
@@ -15,42 +15,44 @@ class Edicao:
         self.numeroDeEdicao = nunumeroDeEdicaomero
         self.volumeDaEdicao = volumeDaEdicao
         self.dataDaEdicao = dataDaEdicao
-        self.artigos = []
+        self.artigos = [] #ligação entre Edicao e Artigo
 
-    def addNovoArtigo(self, artigo):
+    def addNovoArtigo (self,artigo):
         self.artigos.append(artigo)
 
-    def getEdicao(self):
-        return "Edição número:" + str(self.numero) + " | " + "Volume:" + str(self.volume) + " | " + "Data:" + str(self.data)
+    def GetEdicao(self):
+        return "Edição: " + str(self.numero) + " ; " + "Volume: " + str(self.volume) + " ; " + "Data: " + str(self.data)
 
     def showArtigos(self):
         for artigo in self.artigos:
-            print(artigo.getArtigo())
+            print(artigo.exibirArtigo()) 
 
-    def getNumeroDeArtigo(self):
+    def exibirNumeroDeArtigo(self):
         return len(self.artigos)
+    
+    def excluirArtigo(self,titulo):
+        for artigo in self.artigos:
+            if artigo.titulo == titulo:
+                self.artigos.remove(artigo) #função adicional
 
 
 
 #Classe Revista (Título, ISSN, Periodicidade)
 class Revista:
-    def __init__(self, titulo, issn, periodicidade):
-        self.titulo = titulo
+    def __init__ (self, titulo, issn, periodicidade):
+        self.titulo =  titulo
         self.issn = issn
         self.periodicidade = periodicidade
-        self.edicoes = []
-
-#Revista >> Adicionar Nova Edição (especificar quantidade de artigos necessários para uma edição )
+        self.edicoes = [ ] #Ligação entre revista e edição
+        
     def addNovaEdicao(self, edicao):
-        num_artigos = edicao.getNumeroDeArtigo()
-           if(num_artigos >= 10 and num_artigos <= 15):
+        num_artigos = edicao.contarNumeroDeArtigo()
+        if (num_artigos>=10 and num_artigos <=15):
             self.edicoes.append(edicao)
-            print("Edição Lançada com Sucesso!")
+            return f"Edição lançada com sucesso!!!"
+        else:
+            return f"Necessita de no mínimo 10, e no máximo 15 artigos, para lançar uma nova edição!"
 
-           else:
-            print(" É necessário no mínimo 10 e no máximo 15 artigos para uma edição")
-
-#Mostrar
-    def showEdicoes(self):
+    def ShowEdicoes(self): #exibir
         for edicao in self.edicoes:
-        print(edicao.getEdicao())
+            print(edicao.exibirEdicao())
